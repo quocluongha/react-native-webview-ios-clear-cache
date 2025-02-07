@@ -1,5 +1,5 @@
-import WebviewIosClearCache from './NativeWebviewIosClearCache';
+import WebviewIosCacheClear from './NativeWebviewIosClearCache';
 
-export function multiply(a: number, b: number): number {
-  return WebviewIosClearCache.multiply(a, b);
+export function clearCache() {
+  return WebviewIosCacheClear.clearCache();
 }

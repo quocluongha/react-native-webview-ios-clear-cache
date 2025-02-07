@@ -3,10 +3,15 @@
 @implementation WebviewIosClearCache
 RCT_EXPORT_MODULE()
 
-- (NSNumber *)multiply:(double)a b:(double)b {
-    NSNumber *result = @(a * b);
+- (void)clearCache:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject { 
+    NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
+    NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
 
-    return result;
+    dispatch_async(dispatch_get_main_queue(), ^{
+    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+      return resolve(@(true));
+    }];
+  });
 }
 
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
